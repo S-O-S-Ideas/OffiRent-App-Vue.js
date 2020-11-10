@@ -172,7 +172,8 @@ name: "list-offices",
         },
       ],
       listCount: 0,
-      historyList: []
+      historyList: [],
+      displayOffices:[]
     }
   },
   created() {

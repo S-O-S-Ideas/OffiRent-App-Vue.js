@@ -2,7 +2,7 @@ import http from './http-common';
 
 class TutorialsService {
     getAll() {
-        return http.get('/tutorials');
+        return http.get('/offices');
     }
     get(id) {
         return http.get(`/tutorials/${id}`);
