@@ -3,7 +3,7 @@
     <v-list-item>
       <v-img max-height="350px" max-width="500px" v-bind:src="item.url"></v-img>
       <v-list-item-content>
-        <v-list-item-title class="headline mb-10">{{item.title}}</v-list-item-title>
+        <v-list-item-title class="headline mb-10">{{item.address}}</v-list-item-title>
       </v-list-item-content>
 
       <v-tabs v-model="tab" dark>
@@ -24,10 +24,6 @@
           </v-card>
         </v-tab-item>
       </v-tabs-items>
-      <v-list-item-content>
-        <v-list-item-title>Address</v-list-item-title>
-        <v-list-item-subtitle>{{item.address}}</v-list-item-subtitle>
-      </v-list-item-content>
       <v-list-item-content>
         <v-list-item-title>Floor</v-list-item-title>
         <v-list-item-subtitle>{{item.floor}}</v-list-item-subtitle>
@@ -70,15 +66,14 @@ export default {
       tab: null,
       item: {
         id: 0,
-        title: '',
         url:'',
         address: '',
         floor: '',
         capacity: '',
         allowResource: false,
-        score: '',
+        score: 0,
         description: '',
-        price: '',
+        price: 0,
         status: false,
         comment: '',
         services: []
@@ -91,8 +86,8 @@ export default {
     }
   },
   methods: {
-    retrieveOffice(providerId, officeId) {
-      OfficesServices.getViewProvider(providerId, officeId)
+    retrieveOffice(id) {
+      OfficesServices.getViewProvider(id)
           .then((response) => {
             this.item = response.data;
           })
@@ -115,7 +110,7 @@ export default {
     }
   },
   created() {
-    this.retrieveOffice(this.$route.params.providerId, this.$route.params.officeId);
+    this.retrieveOffice(this.$route.params.id);
   }
 }
 </script>

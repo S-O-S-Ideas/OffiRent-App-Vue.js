@@ -1,12 +1,12 @@
 import http from './http-common';
 
 class OfficesService {
-    getViewUser(id) {
-        return http.get(`/offices/${id}`);
+    getViewUser(officeId) {
+        return http.get(`/offices/${officeId}`);
     }
 
-    getViewProvider(providerId, officeId){
-        return http.get(`/offices/${providerId}/${officeId}`);
+    getViewProvider(officeId){
+        return http.get(`/account/offices/${officeId}`);
     }
 
 

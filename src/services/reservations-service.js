@@ -1,11 +1,11 @@
 import http from './http-common';
 
 class ReservationsService {
-    getViewUser(officeId, reservationId) {
-        return http.get(`/offices/${officeId}/reservations/${reservationId}`)
+    getViewUser(id) {
+        return http.get(`/reservations/${id}`)
     }
-    getViewProvider(providerId, officeId, reservationId) {
-        return http.get(`/offices/${providerId}/${officeId}/reservations/${reservationId}`)
+    getViewProvider(id) {
+        return http.get(`/reservation/${id}`)
     }
 }
 

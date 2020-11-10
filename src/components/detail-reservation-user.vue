@@ -63,8 +63,8 @@ export default {
       }
   },
   methods: {
-    retrieveReservation(officeId, reservationId) {
-      ReservationsServices.getViewUser(officeId, reservationId)
+    retrieveReservation(id) {
+      ReservationsServices.getViewUser(id)
         .then( (response)=> {
           this.item = response.data();
         })
@@ -74,7 +74,7 @@ export default {
     }
   },
   created() {
-    this.retrieveReservation(this.$route.params.officeId,this.$route.params.reservationId);
+    this.retrieveReservation(this.$route.params.id);
   }
 }
 </script>

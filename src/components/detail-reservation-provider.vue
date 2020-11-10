@@ -70,8 +70,8 @@ export default {
     }
   },
   methods: {
-    retrieveReservation(providerId, officeId, reservationId) {
-      ReservationsServices.getViewProvider(providerId, officeId, reservationId)
+    retrieveReservation(id) {
+      ReservationsServices.getViewProvider(id)
         .then( (response) => {
           this.item = response.data;
         })
@@ -81,9 +81,7 @@ export default {
     }
   },
   created() {
-    this.retrieveReservation(this.$route.params.providerId,
-                            this.$route.params.officeId,
-                            this.$route.params.reservationId);
+    this.retrieveReservation(this.$route.params.id);
   }
 
 }
