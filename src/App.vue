@@ -19,16 +19,16 @@
           <router-link to="/">Home</router-link>
         </v-btn>
         <v-btn depressed>
-          <router-link to="/profile">Profile</router-link>
+          <router-link to="/workplaces">Search</router-link>
         </v-btn>
         <v-btn depressed>
           <router-link to="/reservations">Reservations</router-link>
         </v-btn>
         <v-btn depressed>
-          <router-link to="/workplaces">Workplaces</router-link>
+          <router-link to="/myworkplaces/">Workplaces</router-link>
         </v-btn>
         <v-btn depressed>
-          <router-link to="/workspace">Oficinas</router-link>
+          <router-link to="/profile">Profile</router-link>
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>>

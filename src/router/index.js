@@ -33,6 +33,11 @@ const routes = [
   {
     path: '/workplaces',
     name: 'detail-workplace',
+    component: () => import('../views/Offices')
+  },
+  {
+    path: '/workplaces/:id',
+    name: 'detail-workplace',
     component: () => import('../components/detail-workplace')
   },
   {
@@ -49,7 +54,7 @@ const routes = [
   // },
 
   {
-    path:'/workspace',
+    path:'/myworkplaces/',
     name: 'workspace',
     component: () => import('../components/offices')
   },

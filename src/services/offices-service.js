@@ -3,7 +3,7 @@ import http from './http-common';
 class OfficesService {
 
     getAll() {
-        return http.get('/workspace');
+        return http.get('/account/100/offices');
     }
     get(id) {
         return http.get(`/workspace/${id}`);
