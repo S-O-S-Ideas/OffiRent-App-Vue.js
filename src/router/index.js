@@ -46,17 +46,17 @@ const routes = [
     name: 'user-reservations',
     component: () => import('../views/user-reservations')
   },
-<<<<<<< HEAD
+
   {
     path:'/workspace',
     name: 'workspace',
     component: () => import('../components/offices')
   },
   {
-    path:'/workspace/new',
+    path: '/workspace/new',
     name: 'add-office',
     component: () => import('../components/add-office')
-=======
+  },
 
 
 
@@ -80,7 +80,7 @@ const routes = [
     path: '/workplaces/:officesId/reservations/:reservationId', //encontrar detalle de la reservacion utilizando id de proveedor, de oficina y de reservacion
     name: 'detail-reservation-provider',
     component: () => import('../components/detail-reservation-provider')
->>>>>>> feature/US08-US23
+
   }
 
 ]

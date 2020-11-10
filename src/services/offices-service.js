@@ -1,7 +1,7 @@
 import http from './http-common';
 
 class OfficesService {
-<<<<<<< HEAD
+
     getAll() {
         return http.get('/workspace');
     }
@@ -28,7 +28,7 @@ class OfficesService {
     findByTitle(title) {
         return http.get(`/workspace?title=${title}`);
     }
-=======
+
     getViewUser(officeId) {
         return http.get(`/offices/${officeId}`);
     }
@@ -39,7 +39,7 @@ class OfficesService {
 
 
 
->>>>>>> feature/US08-US23
+
 }
 
 export default new OfficesService();
