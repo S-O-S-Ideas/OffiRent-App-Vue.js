@@ -36,9 +36,25 @@ const routes = [
     component: () => import('../components/detail-workplace')
   },
   {
+
     path: '/workplaces/edit',
     name: "edit-workplaces",
     component: () => import('../components/edit-workplaces')
+  },
+  {
+    path: '/reservations',
+    name: 'user-reservations',
+    component: () => import('../views/user-reservations')
+  },
+  {
+    path:'/workspace',
+    name: 'workspace',
+    component: () => import('../components/offices')
+  },
+  {
+    path:'/workspace/new',
+    name: 'add-office',
+    component: () => import('../components/add-office')
   }
 
 ]

@@ -24,6 +24,9 @@
         <v-btn depressed>
           <router-link to="/workplaces">Workplaces</router-link>
         </v-btn>
+        <v-btn depressed>
+          <router-link to="/workspace">Oficinas</router-link>
+        </v-btn>
       </v-toolbar-items>
     </v-app-bar>>
     <v-main>
