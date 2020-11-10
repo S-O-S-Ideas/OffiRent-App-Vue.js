@@ -48,7 +48,7 @@
 
 
 <script>
-import Head from "./components/head";
+// import Head from "./components/head";
 //const Head=require("./components/head");
 import Footer from "./components/footer";
 
@@ -56,7 +56,7 @@ export default {
   name: 'App',
 
   components: {
-    Head,
+    // Head,
     Footer
   },
 

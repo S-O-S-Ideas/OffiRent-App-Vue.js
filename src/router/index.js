@@ -41,11 +41,11 @@ const routes = [
     name: "edit-workplaces",
     component: () => import('../components/edit-workplaces')
   },
-  {
-    path: '/reservations',
-    name: 'user-reservations',
-    component: () => import('../views/user-reservations')
-  },
+  // {
+  //   path: '/reservations',
+  //   name: 'user-reservations',
+  //   component: () => import('../views/user-reservations')
+  // },
 
   {
     path:'/workspace',
