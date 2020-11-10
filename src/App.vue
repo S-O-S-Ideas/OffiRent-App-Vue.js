@@ -22,6 +22,9 @@
           <router-link to="/profile">Profile</router-link>
         </v-btn>
         <v-btn depressed>
+          <router-link to="/reservations">Reservations</router-link>
+        </v-btn>
+        <v-btn depressed>
           <router-link to="/workplaces">Workplaces</router-link>
         </v-btn>
         <v-btn depressed>
@@ -35,9 +38,10 @@
     <v-main>
       <v-container>
         <router-view></router-view>
+<!--        <Head></Head>-->
       </v-container>
     </v-main>
-    <v-footer app>
+    <v-footer absolute app>
     </v-footer>
 
   </v-app>

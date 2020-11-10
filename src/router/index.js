@@ -40,6 +40,7 @@ const routes = [
     path: '/workplaces/edit',
     name: "edit-workplaces",
     component: () => import('../components/edit-workplaces')
+
   },
   // {
   //   path: '/reservations',
@@ -56,10 +57,8 @@ const routes = [
     path: '/workspace/new',
     name: 'add-office',
     component: () => import('../components/add-office')
+
   },
-
-
-
   {
     path: '/workplaces/user/:officeId',
     name: 'detail-office-user',
@@ -80,7 +79,17 @@ const routes = [
     path: '/workplaces/:officesId/reservations/:reservationId', //encontrar detalle de la reservacion utilizando id de proveedor, de oficina y de reservacion
     name: 'detail-reservation-provider',
     component: () => import('../components/detail-reservation-provider')
+  },
 
+  {
+    path: '/reservations',
+    name: 'user-reservations',
+    component: () => import('../views/user-reservations')
+  },
+  {
+    path: '/workplaces/:id/reservations',
+    name: 'office-reservations',
+    component: () => import('../views/office-reservations')
   }
 
 ]
