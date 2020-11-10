@@ -9,16 +9,16 @@
       </v-tabs>
       <v-tabs-items v-model="tab">
         <v-tab-item>
-          <ReservationsTable status="Active"></ReservationsTable>
+          <officeReservationsTable status="Active"></officeReservationsTable>
         </v-tab-item>
         <v-tab-item>
-          <ReservationsTable status="Pending"></ReservationsTable>
+          <officeReservationsTable status="Pending"></officeReservationsTable>
         </v-tab-item>
         <v-tab-item>
-          <ReservationsTable status="Finished"></ReservationsTable>
+          <officeReservationsTable status="Finished"></officeReservationsTable>
         </v-tab-item>
         <v-tab-item>
-          <reservationsTable status="Canceled"></reservationsTable>
+          <officeReservationsTable status="Canceled"></officeReservationsTable>
         </v-tab-item>
       </v-tabs-items>
     </v-content>
@@ -26,11 +26,11 @@
 </template>
 
 <script>
-import ReservationsTable from "@/components/reservations-table";
+import officeReservationsTable from "@/components/reservations-table";
 export default {
   name: "user-reservations",
   components: {
-    ReservationsTable,
+    officeReservationsTable,
   },
   data() {
     return {

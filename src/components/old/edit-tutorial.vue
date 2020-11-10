@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import TutorialService from "@/services/tutorials-service";
+import TutorialService from "@/services/reservation-service";
 
 export default {
   name: "edit-tutorial",

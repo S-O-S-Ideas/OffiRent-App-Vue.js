@@ -21,22 +21,27 @@ const routes = [
   {
     path: '/tutorials',
     name: 'tutorials',
-    component: () => import('../components/tutorials')
+    component: () => import('../components/reservations-table')
   },
   {
     path: '/tutorials/new',
     name: 'add-tutorial',
-    component: () => import('../components/add-tutorial')
+    component: () => import('../components/old/add-tutorial')
   },
   {
     path: '/tutorials/:id',
     name: 'edit-tutorial',
-    component: () => import('../components/edit-tutorial')
+    component: () => import('../components/old/edit-tutorial')
   },
   {
     path: '/reservations',
     name: 'user-reservations',
     component: () => import('../views/user-reservations')
+  },
+  {
+    path: '/workplaces/:id/reservations',
+    name: 'office-reservations',
+    component: () => import('../views/office-reservations')
   }
 ]
 

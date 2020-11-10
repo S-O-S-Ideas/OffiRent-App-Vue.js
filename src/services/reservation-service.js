@@ -1,8 +1,8 @@
 import http from './http-common';
 
-class TutorialsService {
-    getAll() {
-        return http.get('/tutorials');
+class ReservationService {
+    getAllByAccount(status) {
+        return http.get(`/reservations/100?status=${status}`);
     }
     get(id) {
         return http.get(`/tutorials/${id}`);
@@ -17,7 +17,7 @@ class TutorialsService {
     }
 
     delete(id) {
-        return http.delete(`/tutorials/${id}`);
+        return http.delete(`/reservations/id?id=${id}`);
     }
 
     deleteAll() {
@@ -29,4 +29,4 @@ class TutorialsService {
     }
 }
 
-export default new TutorialsService();
+export default new ReservationService();
