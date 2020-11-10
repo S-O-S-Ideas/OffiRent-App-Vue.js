@@ -1,15 +1,19 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <ViewUser></ViewUser>
+    <Nuevos></Nuevos>
   </div>
 </template>
 
 <script>
+import ViewUser from "@/components/home/view-user";
+import Nuevos from "@/components/home/new";
 
 export default {
   name: 'Home',
   components: {
-
+    ViewUser,
+    Nuevos,
   }
 }
 </script>
