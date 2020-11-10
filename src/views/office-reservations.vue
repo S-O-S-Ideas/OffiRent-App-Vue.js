@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import officeReservationsTable from "@/components/reservations-table";
+import officeReservationsTable from "@/components/office-reservations-table";
 export default {
   name: "user-reservations",
   components: {
