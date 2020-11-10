@@ -47,9 +47,9 @@ export default {
       item: {
         id: 0,
         address: '',
-        floor: '',
-        capacity: '',
-        price: '',
+        floor: 0,
+        capacity: 0,
+        price: 0,
         description: '',
         allow_resources: false,
         addressRules:[
@@ -57,10 +57,14 @@ export default {
         ],
         floorRules:[
           v=> !!v || 'Floor is required',
+          v => !/(?=.*[A-Z])/.test(v) || 'Price cannot letters',
+          v => !/(?=.*[a-z])/.test(v) || 'Price cannot letters',
           v => !/([!@#$%])/.test(v) || 'Floor cannot have special character'
         ],
         capacityRules:[
           v => !!v || 'Capacity is required',
+          v => !/(?=.*[A-Z])/.test(v) || 'Price cannot letters',
+          v => !/(?=.*[a-z])/.test(v) || 'Price cannot letters',
           v => !/([!@#$%])/.test(v) || 'Capacity cannot have special character'
         ],
         descriptionRules: [
@@ -72,9 +76,6 @@ export default {
           v => !/(?=.*[A-Z])/.test(v) || 'Price cannot letters',
           v => !/(?=.*[a-z])/.test(v) || 'Price cannot letters',
           v => !/([!@#$%])/.test(v) || 'Cannot have special character [!@#$%]'
-        ],
-        statusRules: [
-          v => !!v || 'Status is required',
         ],
         allowResourceRules: [
           v => !!v || 'Status is required',

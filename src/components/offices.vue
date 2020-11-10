@@ -109,18 +109,18 @@ export default {
       editedItem: {
         id: 0,
         address: '',
-        floor: '',
-        capacity: '',
-        price: '',
+        floor: 0,
+        capacity: 0,
+        price: 0,
         description: '',
         allow_resources: false
       },
       defaultItem: {
         id: 0,
         address: '',
-        floor: '',
-        capacity: '',
-        price: '',
+        floor: 0,
+        capacity: 0,
+        price: 0,
         description: '',
         allow_resources: false
       },
@@ -128,7 +128,7 @@ export default {
   },
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? 'New Office' : 'Edit Office'
+      return this.editedIndex === -1 ? 'Crear Oficina' : 'Editar Oficina'
     },
   },
 
@@ -160,7 +160,7 @@ export default {
         capacity: office.capacity,
         price: office.price,
         description: office.description,
-        allow_resources: office.allow_resources ? "Published" : "Pending",
+        allow_resources: office.allow_resources ? "Permite" : "No permite",
       };
     },
 

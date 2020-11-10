@@ -4,7 +4,7 @@
 
 <script>
 export default {
-name: "offiuser-offices.vue"
+name: "user-offices.vue"
 }
 </script>
 
