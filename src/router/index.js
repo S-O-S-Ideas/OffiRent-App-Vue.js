@@ -10,34 +10,37 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  {
-    path: '/search',
-    name: 'Offices',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Offices')
+
+    {
+        path: '/search',
+        name: 'Offices',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "about" */ '../views/Offices')
+    },
+    {
+    path: '/profile',
+    name: 'detail-account',
+    component: () => import('../components/detail-account')
+
   },
   {
-    path: '/tutorials',
-    name: 'tutorials',
-    component: () => import('../components/tutorials')
+    path: '/profile/edit',
+    name:'edit-account',
+    component: () => import('../components/edit-account')
   },
   {
-    path: '/tutorials/new',
-    name: 'add-tutorial',
-    component: () => import('../components/add-tutorial')
+    path: '/workplaces',
+    name: 'detail-workplace',
+    component: () => import('../components/detail-workplace')
   },
   {
-    path: '/tutorials/:id',
-    name: 'edit-tutorial',
-    component: () => import('../components/edit-tutorial')
-  },
-  {
-    path: '/reservations',
-    name: 'user-reservations',
-    component: () => import('../views/user-reservations')
+    path: '/workplaces/edit',
+    name: "edit-workplaces",
+    component: () => import('../components/edit-workplaces')
   }
+
 ]
 
 const router = new VueRouter({
