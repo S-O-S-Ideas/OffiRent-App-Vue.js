@@ -4,6 +4,11 @@ class ReservationService {
     getAllByAccount(status) {
         return http.get(`/reservations/100?status=${status}`);
     }
+
+    getAllByOffice(officeId, status) {
+        return http.get(`offices/${officeId}/reservations?status=${status}`);
+    }
+
     get(id) {
         return http.get(`/tutorials/${id}`);
     }

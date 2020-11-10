@@ -89,7 +89,7 @@ export default {
     },
   },
   methods: {
-    retrieveTutorials() {
+    retrieveReservations() {
       ReservationService.getAllByAccount(this.status)
           .then(response => {
             console.log(response.data);
@@ -113,7 +113,7 @@ export default {
     },
 
     refreshList() {
-      this.retrieveTutorials();
+      this.retrieveReservations();
     },
 
 
@@ -157,7 +157,7 @@ export default {
     }
   },
   mounted() {
-    this.retrieveTutorials();
+    this.retrieveReservations();
   }
 
 }

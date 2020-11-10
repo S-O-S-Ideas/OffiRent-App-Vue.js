@@ -12,7 +12,7 @@
       ></v-text-field>
     </v-card-title>
     <v-card-text>
-      <v-data-table :headers="headers" :items="displayTutorials" :items-per-page="5" :search="search"
+      <v-data-table :headers="headers" :items="displayReservations" :items-per-page="5" :search="search"
                     class="elevation-1" ref="tutorialsTable">
         <template v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="navigateToReservationDetail(item.id)">mdi-magnify</v-icon>
@@ -62,8 +62,8 @@ export default {
         {text: 'Price', value: 'price'},
         {text: 'Actions', value: 'actions', sortable: false}
       ],
-      tutorials: [],
-      displayTutorials: [],
+      reservations: [],
+      displayReservations: [],
       editedIndex: -1,
       editedItem: {
         id: 0,
@@ -89,12 +89,13 @@ export default {
     },
   },
   methods: {
-    retrieveTutorials() {
-      ReservationService.getAllByAccount(this.status)
+    retrieveReservations() {
+      console.log(this.$route.params.id);
+      ReservationService.getAllByOffice(this.$route.params.id, this.status)
           .then(response => {
             console.log(response.data);
-            this.tutorials = response.data;
-            this.displayTutorials = response.data.map(this.getDisplayReservation);
+            this.reservations = response.data;
+            this.displayReservations = response.data.map(this.getDisplayReservation);
           })
           .catch((e) => {
             console.log(e);
@@ -102,32 +103,32 @@ export default {
     },
 
     getDisplayReservation(reservation) {
-      // console.log(reservation);
+      console.log(reservation);
       return {
         id: reservation.id,
         initialDate: reservation.initialDate,
         finishDate: reservation.finishDate,
-        description: reservation.office.description,
+        account: reservation.account.firstName + reservation.account.lastName,
         price: '$'+reservation.office.price,
       };
     },
 
     refreshList() {
-      this.retrieveTutorials();
+      this.retrieveReservations();
     },
 
 
 
     deleteItem(item) {
-      this.editedIndex = this.displayTutorials.indexOf(item);
-      this.editedItem = Object.assign({}, this.tutorials[this.editedIndex]);
+      this.editedIndex = this.displayReservations.indexOf(item);
+      this.editedItem = Object.assign({}, this.reservations[this.editedIndex]);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
       console.log(this.editedItem.id);
       this.deleteReservation(this.editedItem.id);
-      this.tutorials.splice(this.editedIndex, 1);
+      this.reservations.splice(this.editedIndex, 1);
       this.closeDelete();
     },
 
@@ -157,7 +158,7 @@ export default {
     }
   },
   mounted() {
-    this.retrieveTutorials();
+    this.retrieveReservations();
   }
 
 }
