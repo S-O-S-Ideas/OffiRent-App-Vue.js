@@ -30,17 +30,14 @@
         <v-btn depressed>
           <router-link to="/workspace">Oficinas</router-link>
         </v-btn>
-        <v-btn depressed>
-          <router-link to="/about">About</router-link>
-        </v-btn>
       </v-toolbar-items>
     </v-app-bar>>
-    <v-main>
-      <v-container>
-        <router-view></router-view>
-<!--        <Head></Head>-->
-      </v-container>
-    </v-main>
+<!--    <v-main>-->
+<!--      <v-container>-->
+<!--        <router-view></router-view>-->
+<!--&lt;!&ndash;        <Head></Head>&ndash;&gt;-->
+<!--      </v-container>-->
+<!--    </v-main>-->
     <v-footer absolute app>
     </v-footer>
 
