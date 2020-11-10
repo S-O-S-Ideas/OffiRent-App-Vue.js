@@ -46,6 +46,7 @@ const routes = [
     name: 'user-reservations',
     component: () => import('../views/user-reservations')
   },
+<<<<<<< HEAD
   {
     path:'/workspace',
     name: 'workspace',
@@ -55,6 +56,31 @@ const routes = [
     path:'/workspace/new',
     name: 'add-office',
     component: () => import('../components/add-office')
+=======
+
+
+
+  {
+    path: '/workplaces/user/:officeId',
+    name: 'detail-office-user',
+    component: () => import('../components/detail-office-user')
+  },
+  {
+    path: '/workplaces/user/:officeId',  //encontrar detalle de la oficina utilizando id de proveedor y de oficina
+    name: 'detail-office-provider',
+    component: () => import('../components/detail-office-provider')
+  },
+  {
+    path: '/workplaces/:officesId/reservations/:reservationId',
+    name: 'detail-reservation-user',
+    component: () => import('../components/detail-reservation-user')
+  },
+
+  {
+    path: '/workplaces/:officesId/reservations/:reservationId', //encontrar detalle de la reservacion utilizando id de proveedor, de oficina y de reservacion
+    name: 'detail-reservation-provider',
+    component: () => import('../components/detail-reservation-provider')
+>>>>>>> feature/US08-US23
   }
 
 ]
