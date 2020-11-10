@@ -25,6 +25,12 @@ class ReservationService {
         return http.delete(`/reservations/id?id=${id}`);
     }
 
+    setStatus(id, status) {
+        console.log('id:'+id);
+        console.log('status'+status);
+        return http.patch(`/reservations/${id}?status=${status}`);
+    }
+
     deleteAll() {
         return http.delete(`/tutorials`);
     }

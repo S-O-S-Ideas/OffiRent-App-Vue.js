@@ -16,21 +16,35 @@
                     class="elevation-1" ref="tutorialsTable">
         <template v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="navigateToReservationDetail(item.id)">mdi-magnify</v-icon>
-<!--          <template v-if="this.status != 'Pending'">-->
-            <v-icon v-if="status==='Pending'" small @click="deleteItem(item)">mdi-cancel</v-icon>
-<!--          </template>-->
+          <v-icon v-if="status==='Pending'" small @click="acceptItem(item)">mdi-check</v-icon>
+          <v-icon v-if="status==='Pending'" small @click="denyItem(item)">mdi-cancel</v-icon>
+
         </template>
         <template v-slot:top>
-          <v-dialog v-model="dialogDelete" max-width="500px">
+          <v-dialog v-model="dialogDeny" max-width="500px">
             <v-card>
-              <v-card-title class="headline">Delete Item</v-card-title>
+              <v-card-title class="headline">Deny Item</v-card-title>
               <v-card-text>
-                <p>Are you sure you want to delete the item <b>{{ editedItem.id }}</b>?</p>
+                <p>Are you sure you want to deny the reservation <b>{{ editedItem.id }}</b>?</p>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+                <v-btn color="blue darken-1" text @click="closeDeleteDeny">Cancel</v-btn>
+                <v-btn color="blue darken-1" text @click="denyItemConfirm">OK</v-btn>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog v-model="dialogAccept" max-width="500px">
+            <v-card>
+              <v-card-title class="headline">Accept Item</v-card-title>
+              <v-card-text>
+                <p>Are you sure you want to accept the reservation <b>{{ editedItem.id }}</b>?</p>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="closeDeleteAccept">Cancel</v-btn>
+                <v-btn color="blue darken-1" text @click="acceptItemConfirm">OK</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
@@ -53,7 +67,8 @@ export default {
     return {
       search: '',
       dialog: false,
-      dialogDelete: false,
+      dialogDeny: false,
+      dialogAccept: false,
       headers: [
         {text: 'Id', value: 'id'},
         {text: 'Initial Date', value: 'initialDate'},
@@ -84,8 +99,11 @@ export default {
     dialog(val) {
       val || this.close()
     },
-    dialogDelete(val) {
-      val || this.closeDelete()
+    dialogDeleteDeny(val) {
+      val || this.closeDeleteDeny()
+    },
+    dialogDeleteAccept(val) {
+      val || this.closeDeleteAccept()
     },
   },
   methods: {
@@ -93,7 +111,7 @@ export default {
       // console.log(this.$route.params.id);
       ReservationService.getAllByOffice(this.$route.params.id, this.status)
           .then(response => {
-            console.log(response.data);
+            // console.log(response.data);
             this.reservations = response.data;
             this.displayReservations = response.data.map(this.getDisplayReservation);
           })
@@ -103,8 +121,6 @@ export default {
     },
 
     getDisplayReservation(reservation) {
-      console.log('hello');
-      console.log(reservation);
       return {
         id: reservation.id,
         initialDate: reservation.initialDate,
@@ -119,43 +135,68 @@ export default {
     },
 
 
-
-    deleteItem(item) {
+    denyItem(item) {
       this.editedIndex = this.displayReservations.indexOf(item);
       this.editedItem = Object.assign({}, this.reservations[this.editedIndex]);
-      this.dialogDelete = true;
+      this.dialogDeny = true;
     },
 
-    deleteItemConfirm() {
-      console.log(this.editedItem.id);
-      this.deleteReservation(this.editedItem.id);
+    acceptItem(item) {
+      this.editedIndex = this.displayReservations.indexOf(item);
+      this.editedItem = Object.assign({}, this.reservations[this.editedIndex]);
+      this.dialogAccept = true;
+    },
+
+    denyItemConfirm() {
+      // console.log(this.editedItem.id);
+      this.setStatus(this.editedItem.id, 'Canceled');
+      // this.deleteReservation(this.editedItem.id);
       this.reservations.splice(this.editedIndex, 1);
-      this.closeDelete();
+      this.closeDeleteDeny();
+    },
+
+    acceptItemConfirm() {
+      // console.log(this.editedItem.id);
+      this.setStatus(this.editedItem.id,'Active');
+      // this.deleteReservation(this.editedItem.id);
+      this.reservations.splice(this.editedIndex, 1);
+      this.closeDeleteAccept();
     },
 
 
-    closeDelete() {
-      this.dialogDelete = false
+    closeDeleteDeny() {
+      this.dialogDeny = false
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
       })
     },
 
-
-    deleteReservation(id) {
-      ReservationService.delete(id)
-          .then(() => {
-            this.refreshList();
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+    closeDeleteAccept() {
+      this.dialogAccept = false
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      })
     },
 
+    setStatus(id, status) {
+      // console.log(status);
+      // console.log(this.$route.params.id);
+      ReservationService.setStatus(id, status)
+            .then(() => {
+              this.refreshList();
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+    },
+
+
+
     navigateToReservationDetail(id) {
-      console.log(id);
-      this.$router.push({name: 'detail-reservation-user', params: { id: id}});
+      // console.log(id);
+      this.$router.push({name: 'detail-reservation-provider', params: { id: id}});
     }
   },
   mounted() {
