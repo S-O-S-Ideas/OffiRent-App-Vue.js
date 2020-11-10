@@ -58,8 +58,8 @@ export default {
         {text: 'Id', value: 'id'},
         {text: 'Initial Date', value: 'initialDate'},
         {text: 'Finish Date', value: 'finishDate'},
-        {text: 'Description', value: 'description'},
-        {text: 'Price', value: 'price'},
+        {text: 'Account Name', value: 'accountName'},
+        {text: 'Account Phone Number', value: 'accountPhone'},
         {text: 'Actions', value: 'actions', sortable: false}
       ],
       reservations: [],
@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     retrieveReservations() {
-      console.log(this.$route.params.id);
+      // console.log(this.$route.params.id);
       ReservationService.getAllByOffice(this.$route.params.id, this.status)
           .then(response => {
             console.log(response.data);
@@ -103,13 +103,14 @@ export default {
     },
 
     getDisplayReservation(reservation) {
+      console.log('hello');
       console.log(reservation);
       return {
         id: reservation.id,
         initialDate: reservation.initialDate,
         finishDate: reservation.finishDate,
-        account: reservation.account.firstName + reservation.account.lastName,
-        price: '$'+reservation.office.price,
+        accountName: reservation.account.firstName + ' ' + reservation.account.lastName,
+        accountPhone: reservation.account.phoneNumber,
       };
     },
 
