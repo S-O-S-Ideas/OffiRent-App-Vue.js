@@ -37,6 +37,30 @@ const routes = [
     path: '/reservations',
     name: 'user-reservations',
     component: () => import('../views/user-reservations')
+  },
+
+
+
+  {
+    path: '/offices/:id',
+    name: 'detail-office-user',
+    component: () => import('../components/detail-office-user')
+  },
+  {
+    path: '/offices/:providerId/:officeId',  //encontrar detalle de la oficina utilizando id de proveedor y de oficina
+    name: 'detail-office-provider',
+    component: () => import('../components/detail-office-provider')
+  },
+  {
+    path: '/offices/:officeId/reservations/:reservationId',
+    name: 'detail-reservation-user',
+    component: () => import('../components/detail-reservation-user')
+  },
+
+  {
+    path: '/offices/:providerId/:officeId/reservations/:reservationId', //encontrar detalle de la reservacion utilizando id de proveedor, de oficina y de reservacion
+    name: 'detail-reservation-provider',
+    component: () => import('../components/detail-reservation-provider')
   }
 ]
 
