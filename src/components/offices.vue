@@ -15,8 +15,7 @@
       <v-data-table :headers="headers" :items="displayOffices" :items-per-page="5" :search="search"
                     class="elevation-1" ref="officesTable">
         <template v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-          <v-icon small class="mr-2" @click="navigateToEditOffice(item.id)">mdi-pen</v-icon>
+          <v-icon small class="mr-2" @click="navigateToDetailOffice(item.id)">mdi-magnify</v-icon>
           <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
         </template>
         <template v-slot:top>
@@ -101,7 +100,8 @@ export default {
         {text: 'Capacidad', value: 'capacity'},
         {text: 'Precio', value: 'price'},
         {text: 'Descripción', value: 'description'},
-        {text: 'Permite Recursos', value: 'allow_resources', sortable: false}
+        {text: 'Permite Recursos', value: 'allow_resources', sortable: false},
+        {text: 'Actions', value: 'actions', sortable: false}
       ],
       offices: [],
       displayOffices: [],
@@ -179,12 +179,7 @@ export default {
           });
     },
 
-    editItem(item) {
-      this.editedIndex = this.displayOffices.indexOf(item);
-      console.log(item);
-      this.editedItem = this.offices[this.editedIndex];
-      this.dialog = true;
-    },
+
 
     deleteItem(item) {
       this.editedIndex = this.displayOffices.indexOf(item);
@@ -250,11 +245,12 @@ export default {
           });
     },
 
-    navigateToAddOffices() {
-      this.$router.push({name: 'add-office'});
+    navigateToAddOffices(id) {
+      this.$router.push({name: 'add-office', params: {id: id}});
     },
-    navigateToEditOffice(id) {
-      this.$router.push({name: 'edit-office', params: { id: id}});
+    navigateToDetailOffice(id) {
+      console.log(id);
+      this.$router.push({name: 'detail-office-provider', params: { officeId: id}});
     }
   },
   mounted() {

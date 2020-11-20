@@ -33,8 +33,8 @@ class OfficesService {
         return http.get(`/offices/${officeId}`);
     }
 
-    getViewProvider(officeId){
-        return http.get(`/account/offices/${officeId}`);
+    getViewProvider(){
+        return http.get(`/account/100/offices/`);
     }
 
 

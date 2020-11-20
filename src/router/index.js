@@ -65,12 +65,12 @@ const routes = [
 
   },
   {
-    path: '/workplaces/user/:officeId',
+    path: '/workplaces/DAMN/:officeId',
     name: 'detail-office-user',
     component: () => import('../components/detail-office-user')
   },
   {
-    path: '/workplaces/user/:officeId',  //encontrar detalle de la oficina utilizando id de proveedor y de oficina
+    path: '/workplaces/me/:officeId',  //encontrar detalle de la oficina utilizando id de proveedor y de oficina
     name: 'detail-office-provider',
     component: () => import('../components/detail-office-provider')
   },

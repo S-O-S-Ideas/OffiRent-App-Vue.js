@@ -3,7 +3,7 @@
     <v-list-item>
       <v-img max-height="350px" max-width="500px" v-bind:src="item.url"></v-img>
       <v-list-item-content>
-        <v-list-item-title class="headline mb-10">{{item.address}}</v-list-item-title>
+        <v-list-item-title class="headline mb-10">{{this.item.address}}</v-list-item-title>
       </v-list-item-content>
 
       <v-tabs v-model="tab" dark>
@@ -18,10 +18,9 @@
           </v-card>
         </v-tab-item>
         <v-tab-item>
-          <v-card>
-            <v-list-item v-for="header in headers" :key="header"></v-list-item> <!--temporal porque aqui van los services-->
-
-          </v-card>
+<!--          <v-card>-->
+<!--            <v-list-item v-for="header in headers" :key="header"></v-list-item> &lt;!&ndash;temporal porque aqui van los services&ndash;&gt;-->
+<!--          </v-card>-->
         </v-tab-item>
       </v-tabs-items>
       <v-list-item-content>
@@ -67,7 +66,7 @@ export default {
       item: {
         id: 0,
         url:'',
-        address: '',
+        address: 'FUFU LALA',
         floor: '',
         capacity: '',
         allowResource: false,
@@ -86,10 +85,15 @@ export default {
     }
   },
   methods: {
-    retrieveOffice(id) {
-      OfficesServices.getViewProvider(id)
+    // id - param
+    retrieveOffice() {
+      OfficesServices.getViewProvider()
           .then((response) => {
-            this.item = response.data;
+            this.item = response.data[0];
+            console.log('>>>>');
+            console.log(this.item);
+            console.log('<<<<');
+            this.item.url = 'https://www.infomarkglobal.com/wp-content/uploads/2016/08/IMG-13redgate-e1471970927426.jpg';
           })
           .catch(e => {
             console.log(e);
@@ -110,7 +114,11 @@ export default {
     }
   },
   created() {
-    this.retrieveOffice(this.$route.params.id);
+    // this.retrieveOffice(this.$route.params.id);
+    this.retrieveOffice();
+  },
+  mounted(){
+    this.retrieveOffice();
   }
 }
 </script>
