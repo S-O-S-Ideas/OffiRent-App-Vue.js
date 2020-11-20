@@ -7,19 +7,19 @@
       <v-container>
         <v-row>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="item.address" label="Dirección" :rules="addressRules" required></v-text-field>
+            <v-text-field v-model="item.address" label="Dirección" :rules="rules.addressRules" required></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="item.floor" label="Piso" :rules="floorRules" required></v-text-field>
+            <v-text-field v-model="item.floor" label="Piso" :rules="rules.floorRules" required></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="item.capacity" label="Capacidad" :rules="capacityRules" required></v-text-field>
+            <v-text-field v-model="item.capacity" label="Capacidad" :rules="rules.capacityRules" required></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="item.price" label="Precio" :rules="priceRules" required></v-text-field>
+            <v-text-field v-model="item.price" label="Precio" :rules="rules.priceRules" required></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="item.description" label="Descripción" :rules="descriptionRules" required></v-text-field>
+            <v-text-field v-model="item.description" label="Descripción" :rules="rules.descriptionRules" required></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -44,14 +44,7 @@ export default {
   name: "add-office",
   data() {
     return {
-      item: {
-        id: 0,
-        address: '',
-        floor: 0,
-        capacity: 0,
-        price: 0,
-        description: '',
-        allow_resources: false,
+      rules: {
         addressRules:[
           v=> !!v || 'Address is required'
         ],
@@ -82,18 +75,37 @@ export default {
         ],
         yN: ['Yes','No'],
         aD: ['Activated','Deactivated'],
+      },
+      item: {
+        address: '',
+        floor: 0,
+        capacity: 0,
+        allow_resources: false,
+        score: 0,
+        description: '',
+        price: 0,
+        status: true,
+        comment: 'pls funcar',
+        accountId: 100,
+        districtId: 100
       }
     }
   },
   methods: {
 
     save() {
+      console.log(this.item)
+      this.item.floor = parseInt(this.item.floor);
+      this.item.capacity = parseInt(this.item.capacity);
+      this.item.score = parseInt(this.item.score);
+      this.item.price = parseInt(this.item.price);
+      console.log('starting transaction')
       OfficeService.create(this.item)
           .then(() => {
             this.navigateToOffices();
           })
           .catch(e => {
-            console.log(e);
+            console.log(e.response);
           })
     },
     close() {
