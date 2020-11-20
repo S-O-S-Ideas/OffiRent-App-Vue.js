@@ -44,7 +44,7 @@
                       <v-text-field v-model="editedItem.price" label="Precio"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field v-model="editedItem.description" label="Precio"></v-text-field>
+                      <v-text-field v-model="editedItem.description" label="Descripcion"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-checkbox v-model="editedItem.allow_resources" label="Permite Recursos"></v-checkbox>
@@ -156,9 +156,9 @@ export default {
       return {
         id: office.id,
         address: office.address,
-        title: office.floor,
+        floor: office.floor,
         capacity: office.capacity,
-        price: office.price,
+        price: '$'+office.price,
         description: office.description,
         allow_resources: office.allow_resources ? "Permite" : "No permite",
       };
