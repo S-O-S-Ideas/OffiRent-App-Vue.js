@@ -19,7 +19,7 @@
         <v-btn to="faq" text>
           FAQ
         </v-btn>
-        <v-btn to="perfil" text>
+        <v-btn to="profile" text>
           Perfil
           <v-icon small left>mdi-Account</v-icon>
         </v-btn>
@@ -53,7 +53,7 @@ export default {
           title: "FAQ", link:"faq"
         },
         {
-          title: "Perfil", link:"perfil"
+          title: "Perfil", link:"profile"
         },
       ]
     }

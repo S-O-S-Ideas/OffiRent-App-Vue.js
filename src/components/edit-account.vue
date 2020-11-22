@@ -1,21 +1,21 @@
 <template>
   <v-container>
-    <v-card-title class="justify-start">Edit Profile</v-card-title>
+    <v-card-title class="justify-start">Editar Perfil</v-card-title>
     <v-card class="profile_card">
       <v-form v-model="isValid">
-      <p>Personal Information</p>
+      <p>Información Personal</p>
       <div>
         <v-row>
           <v-col cols="12" sm="6">
             <v-text-field
-                label="Name"
+                label="Nombre"
                 v-model="firstName"
                 :rules="nameRules"
                 required></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-                label="Last Name"
+                label="Apellidos"
                 v-model="lastName"
                 :rules="lastNameRules"
                 required></v-text-field>
@@ -29,12 +29,12 @@
                 ref="email"
                 v-model="email"
                 :rules="emailRules"
-                label="Email"
+                label="E-mail"
                 required></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-                label="Password"
+                label="Contraseña"
                 v-model="password"
                 :rules="passwordRules"
                 error-count="6"
@@ -47,7 +47,7 @@
         <v-row>
           <v-col cols="12" sm="3">
             <v-text-field
-                label="Phone Number"
+                label="Teléfono"
                 v-model="phoneNumber"
                 :rules="phoneNumberRules"
                 required>
@@ -55,7 +55,7 @@
           </v-col>
           <v-col cols="12" sm="3">
             <v-text-field
-                label="Identification"
+                label="Identificación"
                 v-model="identification"
                 :rules="identificationRules"
                 required>
@@ -66,9 +66,9 @@
       </v-form>
     </v-card>
     <v-card-actions>
-      <v-btn @click="backClick">Back</v-btn>
+      <v-btn @click="backClick">Atras</v-btn>
       <v-col class="text-right">
-        <v-btn :class="saveButton" :disabled="!isValid" @click="saveClick" bottom center class="white--text" color="#4b7bff">Save Changes
+        <v-btn :class="saveButton" :disabled="!isValid" @click="saveClick" bottom center class="white--text" color="#4b7bff">Guardar Cambios
         </v-btn>
       </v-col>
     </v-card-actions>
@@ -94,37 +94,37 @@ export default {
     editProfile:true,
     isValid: true,
     nameRules:[
-        v=> !!v || 'Name is required',
-        v=> !/(?=.*\d)/.test(v)||'Name cannot have a number',
-        v => !/([!@#$%])/.test(v) || 'Name cannot have special character'
+        v=> !!v || 'Nombre es requerido',
+        v=> !/(?=.*\d)/.test(v)||'Nombre no puede contener un número',
+        v => !/([!@#$%])/.test(v) || 'Nombre no puede contener caracteres especiales'
     ],
     lastNameRules:[
-        v=> !!v || 'Last Name is required',
-        v=> !/(?=.*\d)/.test(v)||'Last Name cannot have a number',
-        v => !/([!@#$%])/.test(v) || 'Last Name cannot have special character'
+        v=> !!v || 'Apellidos es requerido',
+        v=> !/(?=.*\d)/.test(v)||'No puede contener un número',
+        v => !/([!@#$%])/.test(v) || 'No puede contener caracteres especiales'
     ],
-      emailRules:[
+      emailRules: [
         v => !!v || 'Email is required',
-        v => /.+@.+/.test(v) || 'Email must be valid'
+        v => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'E-mail inválido.',
       ],
       passwordRules: [
-        v => !!v || 'Password is required',
-        v => (v && v.length >= 5) || 'Password must have at least 5 characters',
-        v => /(?=.*[A-Z])/.test(v) || 'Password must have at least one uppercase character',
-        v => /(?=.*[a-z])/.test(v) || 'Password must have at least one lowercase character',
-        v => /(?=.*\d)/.test(v) || 'Must have one number',
-        v => /([!@#$%])/.test(v) || 'Must have one special character [!@#$%]'
+        v => !!v || 'Contraseña es requerido',
+        v => (v && v.length >= 6) || 'Debe contener como mínimo 6 caracteres',
+        v => /(?=.*[A-Z])/.test(v) || 'Debe contener una mayúscula',
+        v => /(?=.*[a-z])/.test(v) || 'Debe contener una minúscula',
+        v => /(?=.*\d)/.test(v) || 'Debe contener un número',
+        v => /([!@#$%])/.test(v) || 'Debe contener un caracter especial [!@#$%]'
       ],
       phoneNumberRules: [
-        v => !!v || 'Phone Number is required',
-        v => !/(?=.*[A-Z])/.test(v) || 'Phone Number cannot letters',
-        v => !/(?=.*[a-z])/.test(v) || 'Phone Number cannot letters',
-        v => (v && v.length === 9) || 'Phone Number must have 9 numbers',
-        v => !/([!@#$%])/.test(v) || 'Cannot have special character [!@#$%]'
+        v => !!v || 'Teléfono es requerido',
+        v => !/(?=.*[A-Z])/.test(v) || 'No puede contener letras',
+        v => !/(?=.*[a-z])/.test(v) || 'No puede contener letras',
+        v => !/([!@#$%])/.test(v) || 'No puede contener caracteres especiales [!@#$%]',
+        v => (v && v.length === 9) || 'Debe tener 9 números'
       ],
       identificationRules: [
-        v => !!v || 'Identification is required',
-        v => !/([!@#$%])/.test(v) || 'Cannot have special character [!@#$%]'
+        v => !!v || 'Identificación es requerido',
+        v => !/([!@#$%])/.test(v) || 'No debe contener caracteres especiales [!@#$%]'
       ]
 
     }

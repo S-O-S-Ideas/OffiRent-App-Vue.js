@@ -31,7 +31,7 @@
       </v-card-title>
 
       <v-card-text class="py-2 white--text text-center">
-        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        {{ new Date().getFullYear() }} — <strong>OffiRent</strong>
       </v-card-text>
     </v-card>
   </v-footer>
@@ -60,7 +60,7 @@ name: "footer",
           title: "FAQ", link:"faq"
         },
         {
-          title: "Perfil", link:"perfil"
+          title: "Perfil", link:"profile"
         },
       ]
     }
