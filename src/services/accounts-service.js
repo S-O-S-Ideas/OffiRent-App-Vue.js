@@ -1,16 +1,16 @@
 import http from './http-common';
 
 class AccountService {
-    get(id) {
-        return http.get(`/profile/${id}`);
+    get() {
+        return http.get(`/accounts/100`);
     }
 
     update(id, data) {
-        return http.put(`/profile/edit/${id}`, data);
+        return http.put(`/accounts/edit/${id}`, data);
     }
 
     delete(id){
-        return http.delete(`/profile/id?id=${id}`);
+        return http.delete(`/accounts/id?id=${id}`);
     }
 }
 

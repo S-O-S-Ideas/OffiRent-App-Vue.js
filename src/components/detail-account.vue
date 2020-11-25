@@ -12,14 +12,14 @@
         </div>
       </v-col>
       <v-col cols="10" sm="8" class="right-banner">
-        <v-card-text class="right-text">
-          <p class="text-lg-left">Nombre: Juan</p>
+        <v-card-text class="right-text" >
+          <div class="text-lg-left">Nombre: {{ currentUser.firstName }} </div>
           <br/>
-          <p class="text-lg-left">Apellidos: Dominguez Peralta</p>
+          <div class="text-lg-left">Apellidos: {{ currentUser.lastName }}</div>
           <br/>
-          <p class="text-lg-left">E-mail: juan@gmail.com</p>
+          <div class="text-lg-left">E-mail: {{ currentUser.username }}</div>
           <br/>
-          <p class="text-lg-left">Teléfono: 987654321</p>
+          <div class="text-lg-left">Token: {{ currentUser.token }} </div>
         </v-card-text>
       </v-col>
         <v-btn class="button" large color="primary" @click="navigateToEditProfile">Editar Perfil</v-btn>
@@ -57,18 +57,38 @@
 
 <script>
 
+import AccountService from "@/services/accounts-service";
+
 export default {
   name: "profile",
+  props: {
+    status: String
+  },
   data(){
     return{
       dialog: false,
       defaultItem: {
+        id: 0,
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        identification: '',
       },
       displayTutorials: [],
       tutorials: [],
+      editedIndex: -1,
+      accounts: [],
     }
   },
   computed: {
+    currentUser() {
+      console.log(this.$store.state.auth.user);
+      return this.$store.state.auth.user;
+    },
+    currentUserFullName() {
+      return `${this.currentUser.firstName} ${this.currentUser.lastName}`;
+    },
     formTitle() {
       return 'Are you sure to deactivate your account?'
     },
@@ -76,7 +96,37 @@ export default {
       return 'Your account has been deactivated'
     }
   },
+  mounted() {
+    if (!this.currentUser) {
+      this.$router.push('/login');
+    }
+  },
   methods:{
+    retrieveProfile() {
+      AccountService.get()
+          .then(response => {
+            console.log(response.data);
+            this.tutorials = response.data;
+            this.displayTutorials = response.data.map(this.getDisplayProfile);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+    },
+    getDisplayProfile(account){
+      return {
+        id: account.id,
+        firstName: account.firstName,
+        lastName: account.lastName,
+        email: account.email,
+        phoneNumber: account.phoneNumber,
+        identification: account.identification,
+      };
+    },
+
+    refreshList() {
+      this.retrieveProfile();
+    },
     close() {
       this.dialog = false
       this.$nextTick(() => {
@@ -100,6 +150,9 @@ export default {
     navigateToEditProfile(){
       this.$router.push({name: 'edit-account'});
     },
+    mounted(){
+      this.retrieveProfile();
+    }
 
 }
 
@@ -122,12 +175,12 @@ export default {
 }
 .button{
   margin-top: 2vw;
-  margin-left: 7.5vw;
+  margin-left: 6.2vw;
   margin-bottom: 5vw;
   border-radius: 20px;
-  height: 30%;
-  width: 10%;
-  font-size: 0.7vw;
+  width: 12%;
+  height: 12%;
+  font-size: 0.75vw;
 }
 .right-banner{
   margin-left: 45vw;

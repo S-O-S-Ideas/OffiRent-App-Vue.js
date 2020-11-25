@@ -13,32 +13,36 @@
             </v-col>
           </v-row>
         </v-card-text>
+        <v-form @submit="handleLogin" v-model="isValid">
         <v-card-text class="login">
           <div class="form">
             <v-text-field class="text-field"
-                          v-model="email"
+                          v-model="user.username"
                           :rules="emailRules"
                           label="E-mail"
             ></v-text-field>
           </div>
           <div class="form">
             <v-text-field class="text-field"
-                          v-model="password"
+                          v-model="user.password"
                           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                           :rules="passwordRules"
                           :type="show1 ? 'text' : 'password'"
-                          name="input-10-1"
                           label="Contraseña"
-                          hint="Como mínimo 8 caracteres"
-                          counter
+                          hint="Como mínimo 6 caracteres"
                           @click:append="show1 = !show1"
             ></v-text-field>
           </div>
+          <div v-if="message">{{ message }}</div>
           <v-card-text class="btn">
-            <v-btn @click="validateUser" class="login_btn" color="primary" :disabled="!isValid" >Log In</v-btn>
+            <v-btn :disabled="loading" type="submit" class="login_btn" color="primary" >Log In
+              <v-progress-circular indeterminate color="primary" v-if="loading">
+              </v-progress-circular>
+            </v-btn>
             <v-btn to="/register" class="login_btn" color="primary">Registrate</v-btn>
           </v-card-text>
         </v-card-text>
+        </v-form>
 
         <v-card-text class="about">
           <v-row>
@@ -70,31 +74,63 @@
 
 
 <script>
-
+import User from "@/models/user";
 export default {
   name: "Login",
-  data: () => ({
-    userId: 0,
-    firstName: null,
-    email: null,
-    isValid: true,
-    show1: false,
-    auth: false,
-    role: false,
-    password: '',
-    ref: "/",
-    users: [],
-    userProfile: [],
+  data() {
+    return {
+      user: new User('','','',''),
+      loading: false,
+      message: '',
+      isValid: true,
+      show1: false,
 
-    passwordRules: [
-      v => !!v || 'Password is required',
-      v => (v && v.length >= 8) || 'Password must have at least 6 characters',
-    ],
-    emailRules: [
-      v => !!v || 'Email is required',
-      v => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'E-mail inválido.',
-    ]
-  }),
+      passwordRules: [
+        v => !!v || 'Contraseña es requerida',
+        v => (v && v.length >= 4) || 'Debe tener como minimo 6 caracteres',
+      ],
+      emailRules: [
+        v => !!v || 'E-mail es requerido',
+        v => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'E-mail inválido.',
+      ]
+    };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push('/');
+    }
+  },
+  methods: {
+    handleLogin() {
+      this.loading = true;
+      console.log('Starting Login handling');
+      if (!this.isValid) {
+        console.log('Invalid');
+        this.loading = false;
+        return;
+      }
+      if (this.user.username && this.user.password) {
+        this.$store.dispatch('auth/login', this.user)
+        .then((user) => {
+          console.log('Logged In');
+          console.log(user);
+          this.$router.push('/');
+        },
+        error => {
+          console.log('Error');
+          this.loading = false;
+          this.message = (error.response && error.response.data)
+          || error.message || error.toString();
+        }
+        )
+      }
+    }
+  }
 }
 </script>
 
