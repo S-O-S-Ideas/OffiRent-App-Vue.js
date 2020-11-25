@@ -7,7 +7,7 @@
       <Footer></Footer>
     </div>
     <!--v-app-bar app dark v-if="currentUser" para no mostrar la barra en el login y register-->
-    <v-app-bar app dark>
+    <v-app-bar app dark v-if="currentUser">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>OffiRent</v-toolbar-title>
       <v-spacer></v-spacer>

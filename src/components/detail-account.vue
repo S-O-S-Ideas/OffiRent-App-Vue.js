@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title class="profile">Perfil</v-card-title>
-      <v-spacer></v-spacer>
+    <v-spacer></v-spacer>
     <v-row no-gutters>
       <v-col cols="15" sm="10">
         <div>
@@ -22,51 +22,39 @@
           <div class="text-lg-left">Token: {{ currentUser.token }} </div>
         </v-card-text>
       </v-col>
-        <v-btn class="button" large color="primary" @click="navigateToEditProfile">Editar Perfil</v-btn>
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{on, attrs}">
-            <v-btn class="button" large color="error" v-bind="attrs" v-on="on">Desactivar Cuenta</v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancelar</v-btn>
-              <v-dialog v-model="dialog" max-width="500px">
-                <template v-slot:activator="{on, attrs}">
-                  <v-btn small color="blue darken-1"  v-bind="attrs" v-on="on">Ok</v-btn>
-                </template>
-                <v-card>
-                  <v-card-title>
-                    <span class="headline">{{ formTitle1 }}</span>
-                  </v-card-title>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="close">Ok</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+      <v-btn class="button" large color="primary" @click="navigateToEditProfile">Editar Perfil</v-btn>
+      <v-dialog v-model="dialog" max-width="500px">
+        <template v-slot:activator="{on, attrs}">
+          <v-btn class="button" large color="error" v-bind="attrs" v-on="on">Desactivar Cuenta</v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="headline">{{ formTitle }}</span>
+          </v-card-title>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="close">Cancelar</v-btn>
+            <v-btn small color="blue darken-1"  text @click="deleteAccount">Ok</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-row>
   </v-card>
 </template>
 
 <script>
 
-import AccountService from "@/services/accounts-service";
+import AccountService from "../services/accounts-service";
 
 export default {
   name: "profile",
   props: {
-    status: String
+
   },
   data(){
     return{
       dialog: false,
+      dialogDelete: false,
       defaultItem: {
         id: 0,
         firstName: '',
@@ -75,9 +63,9 @@ export default {
         phoneNumber: '',
         identification: '',
       },
-      displayTutorials: [],
-      tutorials: [],
-      editedIndex: -1,
+      displayProfile: [],
+      profile: [],
+      editedIndex: 1,
       accounts: [],
     }
   },
@@ -86,16 +74,11 @@ export default {
       console.log(this.$store.state.auth.user);
       return this.$store.state.auth.user;
     },
-    currentUserFullName() {
-      return `${this.currentUser.firstName} ${this.currentUser.lastName}`;
-    },
     formTitle() {
       return 'Are you sure to deactivate your account?'
     },
-    formTitle1(){
-      return 'Your account has been deactivated'
-    }
   },
+
   mounted() {
     if (!this.currentUser) {
       this.$router.push('/login');
@@ -106,8 +89,8 @@ export default {
       AccountService.get()
           .then(response => {
             console.log(response.data);
-            this.tutorials = response.data;
-            this.displayTutorials = response.data.map(this.getDisplayProfile);
+            this.profile = response.data;
+            this.displayProfile = response.data.map(this.getDisplayProfile);
           })
           .catch((e) => {
             console.log(e);
@@ -115,7 +98,6 @@ export default {
     },
     getDisplayProfile(account){
       return {
-        id: account.id,
         firstName: account.firstName,
         lastName: account.lastName,
         email: account.email,
@@ -134,26 +116,34 @@ export default {
         this.editedIndex = -1
       })
     },
-    save() {
-      this.dialog = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
+    deleteItem(item) {
+      this.editedIndex = this.displayProfile.indexOf(item);
+      this.editedItem = Object.assign({}, this.accounts[this.editedIndex]);
+      this.dialogDelete = true;
     },
-    editItem(item) {
-      this.editedIndex = this.displayTutorials.indexOf(item);
-      console.log(item);
-      this.editedItem = this.tutorials[this.editedIndex];
-      this.dialog = true;
+    deleteItemConfirm() {
+      console.log(this.editedItem.id);
+      this.deleteAccount(this.editedItem.id);
+      this.accounts.splice(this.editedIndex, 1);
+      this.closeDelete();
     },
     navigateToEditProfile(){
       this.$router.push({name: 'edit-account'});
     },
-    mounted(){
-      this.retrieveProfile();
-    }
+    deleteAccount() {
+      AccountService.delete()
+          .then(() => {
+            this.refreshList();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+    },
 
+    logout() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
+    }
 }
 
 }

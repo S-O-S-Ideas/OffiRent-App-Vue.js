@@ -68,7 +68,7 @@
     <v-card-actions>
       <v-btn @click="backClick">Atras</v-btn>
       <v-col class="text-right">
-        <v-btn :class="saveButton" :disabled="!isValid" @click="saveClick" bottom center class="white--text" color="#4b7bff">Guardar Cambios
+        <v-btn :disabled="!isValid" @click="save" bottom center class="white--text" color="#4b7bff">Guardar Cambios
         </v-btn>
       </v-col>
     </v-card-actions>
@@ -77,20 +77,22 @@
 
 <script>
 
+import AccountService from "@/services/accounts-service";
 export default {
   name: "edit-account",
   props:{
     articles: Array
   },
   data(){
-    return{
-    email: null,
-    password: null,
-    identification: null,
-    phoneNumber:null,
-    firstName: null,
-    lastName: null,
-    saveButton:"saveButton",
+    return {
+      item: {
+        email: null,
+        password: null,
+        identification: null,
+        phoneNumber:null,
+        firstName: null,
+        lastName: null
+      },
     editProfile:true,
     isValid: true,
     nameRules:[
@@ -130,12 +132,34 @@ export default {
     }
   },
   methods:{
-      backClick(){
+    retrieveAccount(){
+      AccountService.get()
+      .then((response) => {
+        this.item = response.data;
+      })
+      .catch(e => {
+        console.log(e);
+      })
+    },
+    save() {
+      AccountService.update(this.item)
+      .then(() => {
+        this.navigateToAccount();
+      })
+      .catch(e => {
+        console.log(e);
+      })
+    },
+
+    backClick(){
       this.navigateToAccount();
     },
     navigateToAccount(){
       this.$router.push({name: 'detail-account'})
     }
+  },
+  created() {
+    this.retrieveAccount(this.$route.params.id);
   }
 }
 </script>

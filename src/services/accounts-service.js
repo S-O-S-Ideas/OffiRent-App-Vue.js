@@ -5,12 +5,12 @@ class AccountService {
         return http.get(`/accounts/100`);
     }
 
-    update(id, data) {
-        return http.put(`/accounts/edit/${id}`, data);
+    update(data) {
+        return http.put(`/accounts/100`, data);
     }
 
-    delete(id){
-        return http.delete(`/accounts/id?id=${id}`);
+    delete(){
+        return http.delete(`/accounts/id?id=${100}`);
     }
 }
 
