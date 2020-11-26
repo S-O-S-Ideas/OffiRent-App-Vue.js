@@ -10,7 +10,7 @@ class OfficesService {
     }
 
     create(data) {
-        return http.post("/workspace", data);
+        return http.post("/offices", data);
     }
 
     update(id, data) {

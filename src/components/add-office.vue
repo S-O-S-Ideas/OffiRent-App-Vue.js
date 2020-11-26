@@ -7,19 +7,19 @@
       <v-container>
         <v-row>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="item.address" label="Dirección" :rules="addressRules" required></v-text-field>
+            <v-text-field v-model="item.address" label="Dirección" :rules="rules.addressRules" required></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="item.floor" label="Piso" :rules="floorRules" required></v-text-field>
+            <v-text-field v-model="item.floor" label="Piso" :rules="rules.floorRules" required></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="item.capacity" label="Capacidad" :rules="capacityRules" required></v-text-field>
+            <v-text-field v-model="item.capacity" label="Capacidad" :rules="rules.capacityRules" required></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="item.price" label="Precio" :rules="priceRules" required></v-text-field>
+            <v-text-field v-model="item.price" label="Precio" :rules="rules.priceRules" required></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="item.description" label="Descripción" :rules="descriptionRules" required></v-text-field>
+            <v-text-field v-model="item.description" label="Descripción" :rules="rules.descriptionRules" required></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -42,16 +42,19 @@ import OfficeService from "@/services/offices-service";
 
 export default {
   name: "add-office",
-  data() {
+  data () {
     return {
       item: {
-        id: 0,
         address: '',
         floor: 0,
         capacity: 0,
         price: 0,
         description: '',
-        allow_resources: false,
+        allowResource: false,
+        accountId: 100,
+        districtId: 100,
+      },
+      rules: {
         addressRules:[
           v=> !!v || 'Address is required'
         ],
@@ -88,6 +91,10 @@ export default {
   methods: {
 
     save() {
+      this.item.floor = parseInt(this.item.floor)
+      this.item.capacity = parseInt(this.item.capacity)
+      this.item.price = parseFloat(this.item.price)
+      console.log(this.item)
       OfficeService.create(this.item)
           .then(() => {
             this.navigateToOffices();

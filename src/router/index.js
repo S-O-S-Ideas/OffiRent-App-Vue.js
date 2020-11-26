@@ -32,7 +32,7 @@ const routes = [
   },
   {
     path: '/workplaces',
-    name: 'detail-workplace',
+    name: 'workplaces',
     component: () => import('../views/Offices')
   },
   {
