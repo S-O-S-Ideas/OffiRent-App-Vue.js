@@ -10,20 +10,46 @@
             <v-card-title>{{this.item.address}}</v-card-title>
           </v-img>
           <v-card-text>
-            <div>$2000</div>
+            <div>
+              $ {{ this.item.price }}      | ★ {{this.item.score}}      | Aforo: {{this.item.score}}
+            </div>
             <p class="display-1 text--primary">
-              be•nev•o•lent
+              {{this.item.title}}
            </p>
-            <p>★ 45</p>
             <div class="text--primary">
               {{this.item.description}}
             </div>
           </v-card-text>
-          <v-card-actions>
+
+          <v-card-actions v-model="item">
             <v-btn
+                @click="goBack"
                 text
                 color="deep-purple accent-4">
-              Learn More
+              Regresar
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn v-if="!amIOWner()"
+                text
+                color="deep-purple accent-4">
+              Reservar
+            </v-btn>
+            <v-btn v-if="amIOWner()"
+                   text
+                   color="deep-purple accent-4">
+              Actualizar
+            </v-btn>
+            <v-btn v-if="amIOWner()"
+                   text
+                   color="deep-purple accent-4">
+              Archivar
+            </v-btn>
+            <v-btn
+                   @click="navigateToOfficeReservation(item.id)"
+                   v-if="amIOWner()"
+                   text
+                   color="deep-purple accent-4">
+              Ver Reservas
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -41,6 +67,7 @@ export default {
     return {
       tab: null,
       item: {
+        title: '',
         id: 0,
         url:'',
         address: '',
@@ -52,7 +79,8 @@ export default {
         price: 0,
         status: false,
         comment: '',
-        services: []
+        services: [],
+        accountId: 0
       }
     }
   },
@@ -63,6 +91,19 @@ export default {
   },
   methods: {
 
+    amIOWner() {
+      return parseInt(100) == parseInt(this.item.accountId)
+      // console.log(parseInt(100) === parseInt(this.item.accountId))
+    },
+
+    navigateToOfficeReservation(id){
+      console.log('queso');
+      this.$router.push({name: 'office-reservations', params: { id: id}});
+    },
+
+    goBack() {
+      this.$router.push({name: 'workspace'});
+    },
     mounted() {
       this.retrieveOffice();
     },
@@ -74,8 +115,15 @@ export default {
     retrieveOffice() {
       OfficesServices.getViewProvider(this.$route.params.officeId)
           .then((response) => {
+            this.item.id = response.data.id
+            this.item.title = response.data.title
+            this.item.url - response.data.url,
             this.item.address = response.data.address;
-            this.item.description = response.data.description
+            this.item.capacity = response.data.capacity;
+            this.item.score = response.data.score;
+            this.item.description = response.data.description;
+            this.item.price = response.data.price;
+            this.item.accountId = response.data.accountId;
             console.log(response.data)
           })
           .catch(e => {

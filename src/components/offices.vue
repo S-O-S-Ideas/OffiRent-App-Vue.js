@@ -32,6 +32,9 @@
                       <v-text-field v-model="editedItem.id" label="Id"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.title" label="Precio"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
                       <v-text-field v-model="editedItem.address" label="Dirección"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
@@ -42,9 +45,6 @@
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field v-model="editedItem.price" label="Precio"></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field v-model="editedItem.description" label="Precio"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-checkbox v-model="editedItem.allow_resources" label="Permite Recursos"></v-checkbox>
@@ -96,18 +96,19 @@ export default {
       dialogDelete: false,
       headers: [
         {text: 'Id', value: 'id'},
+        {text: 'Nombre', value: 'title'},
         {text: 'Dirección', value: 'address'},
         {text: 'Piso', value: 'floor'},
         {text: 'Capacidad', value: 'capacity'},
         {text: 'Precio', value: 'price'},
-        {text: 'Descripción', value: 'description'},
         {text: 'Permite Recursos', value: 'allow_resources', sortable: false},
-        {text: 'Lol', value: 'actions', sortable: false}
+        {text: 'Acciones', value: 'actions', sortable: false}
       ],
       offices: [],
       displayOffices: [],
       editedIndex: -1,
       editedItem: {
+        title: '',
         id: 0,
         address: '',
         floor: 0,
@@ -117,6 +118,7 @@ export default {
         allow_resources: false
       },
       defaultItem: {
+        title: '',
         id: 0,
         address: '',
         floor: 0,
@@ -158,7 +160,7 @@ export default {
       return {
         id: office.id,
         address: office.address,
-        title: office.floor,
+        title: office.title,
         capacity: office.capacity,
         price: office.price,
         description: office.description,

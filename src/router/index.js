@@ -52,7 +52,6 @@ const routes = [
   //   name: 'user-reservations',
   //   component: () => import('../views/user-reservations')
   // },
-
   {
     path:'/myworkplaces/',
     name: 'workspace',
@@ -63,11 +62,6 @@ const routes = [
     name: 'add-office',
     component: () => import('../components/add-office')
 
-  },
-  {
-    path: '/workplaces/user/:officeId',
-    name: 'detail-office-user',
-    component: () => import('../components/detail-office-user')
   },
   {
     path: '/workplaces/provider/:officeId',  //encontrar detalle de la oficina utilizando id de proveedor y de oficina
