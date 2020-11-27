@@ -70,7 +70,7 @@ const routes = [
     component: () => import('../components/detail-office-user')
   },
   {
-    path: '/workplaces/user/:officeId',  //encontrar detalle de la oficina utilizando id de proveedor y de oficina
+    path: '/workplaces/provider/:officeId',  //encontrar detalle de la oficina utilizando id de proveedor y de oficina
     name: 'detail-office-provider',
     component: () => import('../components/detail-office-provider')
   },

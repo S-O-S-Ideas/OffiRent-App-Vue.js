@@ -16,7 +16,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn depressed>
-          <router-link to="/">Home</router-link>
+          <router-link to="/"><a>Home</a></router-link>
         </v-btn>
         <v-btn depressed>
           <router-link to="/workplaces">Search</router-link>
@@ -66,3 +66,8 @@ export default {
   }),
 };
 </script>
+
+<style>
+
+
+</style>

@@ -13,9 +13,9 @@
     </v-card-title>
     <v-card-text>
       <v-data-table :headers="headers" :items="displayOffices" :items-per-page="5" :search="search"
-                    class="elevation-1" ref="officesTable">
+                    class="elevation-1" ref="officesTable" >
         <template v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+          <v-icon small class="mr-2" @click="viewDetail(item.id)">mdi-magnify</v-icon>
           <v-icon small class="mr-2" @click="navigateToEditOffice(item.id)">mdi-pen</v-icon>
           <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
         </template>
@@ -101,7 +101,8 @@ export default {
         {text: 'Capacidad', value: 'capacity'},
         {text: 'Precio', value: 'price'},
         {text: 'Descripción', value: 'description'},
-        {text: 'Permite Recursos', value: 'allow_resources', sortable: false}
+        {text: 'Permite Recursos', value: 'allow_resources', sortable: false},
+        {text: 'Lol', value: 'actions', sortable: false}
       ],
       offices: [],
       displayOffices: [],
@@ -141,6 +142,7 @@ export default {
     },
   },
   methods: {
+
     retrieveOffices() {
       OfficeService.getAll()
           .then(response => {
@@ -179,11 +181,8 @@ export default {
           });
     },
 
-    editItem(item) {
-      this.editedIndex = this.displayOffices.indexOf(item);
-      console.log(item);
-      this.editedItem = this.offices[this.editedIndex];
-      this.dialog = true;
+    viewDetail(id) {
+      this.$router.push({name: 'detail-office-provider', params: { officeId: id }});
     },
 
     deleteItem(item) {

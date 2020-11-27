@@ -2,7 +2,7 @@ import http from './http-common';
 
 class ReservationService {
     getAllByAccount(status) {
-        return http.get(`/reservations/100?status=${status}`);
+        return http.get(`/accounts/100/reservations?status=${status}`);
     }
 
     getAllByOffice(officeId, status) {
