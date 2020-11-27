@@ -15,20 +15,20 @@
 
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn depressed>
-          <router-link to="/"><a>Home</a></router-link>
+        <v-btn depressed >
+          <router-link class="white--text" to="/">Home</router-link>
         </v-btn>
         <v-btn depressed>
-          <router-link to="/workplaces">Search</router-link>
+          <router-link class="white--text" to="/workplaces">Search</router-link>
         </v-btn>
         <v-btn depressed>
-          <router-link to="/reservations">Reservations</router-link>
+          <router-link class="white--text" to="/reservations">Reservations</router-link>
         </v-btn>
         <v-btn depressed>
-          <router-link to="/myworkplaces/">Workplaces</router-link>
+          <router-link class="white--text" to="/myworkplaces/">Workplaces</router-link>
         </v-btn>
         <v-btn depressed>
-          <router-link to="/profile">Profile</router-link>
+          <router-link class="white--text" to="/profile">Profile</router-link>
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>>
@@ -51,7 +51,7 @@
 <script>
 // import Head from "./components/head";
 //const Head=require("./components/head");
-import Footer from "./components/footer";
+import Footer from "./components/structure/footer";
 
 export default {
   name: 'App',
@@ -68,6 +68,10 @@ export default {
 </script>
 
 <style>
-
-
+.v-application a {
+  color: #FFFF;
+}
+a:hover {
+  color: #00F
+}
 </style>

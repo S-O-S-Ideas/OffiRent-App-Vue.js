@@ -8,8 +8,8 @@
         flat
         tile
     >
-      <v-card-title class="primary" >
-        <v-list class="primary ">
+      <v-card-title class="grey--text" >
+        <v-list class="grey--text ">
           <v-list-item  v-for="item in items" :key="item.title" :to="item.link" link>
             {{item.title}}
           </v-list-item>

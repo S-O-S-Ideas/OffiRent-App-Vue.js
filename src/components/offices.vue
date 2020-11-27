@@ -184,7 +184,7 @@ export default {
     },
 
     viewDetail(id) {
-      this.$router.push({name: 'detail-office-provider', params: { officeId: id }});
+      this.$router.push({name: 'detail-office', params: { officeId: id }});
     },
 
     deleteItem(item) {

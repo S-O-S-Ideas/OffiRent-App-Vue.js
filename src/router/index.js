@@ -35,11 +35,7 @@ const routes = [
     name: 'workplaces',
     component: () => import('../views/Offices')
   },
-  {
-    path: '/workplaces/:id',
-    name: 'detail-workplace',
-    component: () => import('../components/detail-workplace')
-  },
+
   {
 
     path: '/workplaces/edit',
@@ -64,22 +60,10 @@ const routes = [
 
   },
   {
-    path: '/workplaces/provider/:officeId',  //encontrar detalle de la oficina utilizando id de proveedor y de oficina
-    name: 'detail-office-provider',
-    component: () => import('../components/detail-office-provider')
+    path: '/workplaces/:officeId',  //encontrar detalle de la oficina utilizando id de proveedor y de oficina
+    name: 'detail-office',
+    component: () => import('../components/detail-office')
   },
-  {
-    path: '/workplaces/:officesId/reservations/:reservationId',
-    name: 'detail-reservation-user',
-    component: () => import('../components/detail-reservation-user')
-  },
-
-  {
-    path: '/workplaces/:officesId/reservations/:reservationId', //encontrar detalle de la reservacion utilizando id de proveedor, de oficina y de reservacion
-    name: 'detail-reservation-provider',
-    component: () => import('../components/detail-reservation-provider')
-  },
-
   {
     path: '/reservations',
     name: 'user-reservations',

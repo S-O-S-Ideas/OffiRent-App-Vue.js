@@ -21,6 +21,9 @@
           <officeReservationsTable status="Canceled"></officeReservationsTable>
         </v-tab-item>
       </v-tabs-items>
+      <v-btn color="primary" @click="returnToOffice">
+        Volver a oficina
+      </v-btn>
     </v-content>
   </v-app>
 </template>
@@ -35,6 +38,12 @@ export default {
   data() {
     return {
       tab: null
+    }
+  },
+  methods: {
+    returnToOffice() {
+      console.log('this.$route.params.id');
+      this.$router.push({name: 'detail-office', params: { officeId: this.$route.params.id}});
     }
   }
 };

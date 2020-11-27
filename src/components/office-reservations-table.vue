@@ -15,7 +15,6 @@
       <v-data-table :headers="headers" :items="displayReservations" :items-per-page="5" :search="search"
                     class="elevation-1" ref="tutorialsTable">
         <template v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="navigateToReservationDetail(item.id)">mdi-magnify</v-icon>
           <v-icon v-if="status==='Pending'" small @click="acceptItem(item)">mdi-check</v-icon>
           <v-icon v-if="status==='Pending'" small @click="denyItem(item)">mdi-cancel</v-icon>
 
