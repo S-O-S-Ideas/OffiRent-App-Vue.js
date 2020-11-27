@@ -30,6 +30,7 @@
 
 <script>
 import officeReservationsTable from "@/components/office-reservations-table";
+// import ReservationService from "@/services/reservation-service";
 export default {
   name: "user-reservations",
   components: {
@@ -44,7 +45,9 @@ export default {
     returnToOffice() {
       console.log('this.$route.params.id');
       this.$router.push({name: 'detail-office', params: { officeId: this.$route.params.id}});
-    }
+    },
+
+
   }
 };
 </script>

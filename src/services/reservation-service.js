@@ -5,6 +5,10 @@ class ReservationService {
         return http.get(`/accounts/100/reservations?status=${status}`);
     }
 
+    getAllByOfficeNoStatus(officeId) {
+        return http.get(`offices/${officeId}/reservations`);
+    }
+
     getAllByOffice(officeId, status) {
         return http.get(`offices/${officeId}/reservations?status=${status}`);
     }

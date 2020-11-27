@@ -34,7 +34,7 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-dialog v-model="dialogAccept" max-width="500px">
+            <v-dialog v-model="dialogAccept" max-width="500px">
             <v-card>
               <v-card-title class="headline">Accept Item</v-card-title>
               <v-card-text>

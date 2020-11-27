@@ -2,11 +2,10 @@
   <v-app>
 
     <div>
-
       <v-content>
         <router-view/>
       </v-content>
-      <Footer></Footer>
+
     </div>
 
     <v-app-bar app dark>
@@ -14,7 +13,7 @@
       <v-toolbar-title>OffiRent</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <v-toolbar-items class="hidden-xs-only">
         <v-btn depressed >
           <router-link class="white--text" to="/">Home</router-link>
         </v-btn>
@@ -32,15 +31,15 @@
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>>
+
+
 <!--    <v-main>-->
 <!--      <v-container>-->
 <!--        <router-view></router-view>-->
 <!--&lt;!&ndash;        <Head></Head>&ndash;&gt;-->
 <!--      </v-container>-->
 <!--    </v-main>-->
-    <v-footer absolute app>
-    </v-footer>
-
+    <Footer></Footer>
   </v-app>
 </template>
 

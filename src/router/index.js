@@ -73,6 +73,16 @@ const routes = [
     path: '/workplaces/:id/reservations',
     name: 'office-reservations',
     component: () => import('../views/office-reservations')
+  },
+  {
+    path: '/workplaces/:id/reservations',
+    name: 'office-reservations',
+    component: () => import('../views/office-reservations')
+  },
+  {
+    path: '/workplaces/:id/reservations/new',
+    name: 'add-reservation',
+    component: () => import('../components/add-reservation')
   }
 
 ]
