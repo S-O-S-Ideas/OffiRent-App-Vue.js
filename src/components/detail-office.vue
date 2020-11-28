@@ -78,7 +78,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="closeReservationDialog">Cancelar</v-btn>
-                <v-btn color="blue darken-1" text>Confirmar</v-btn>
+                <v-btn color="blue darken-1" text @click="gotoCreation" >Confirmar</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
@@ -195,6 +195,10 @@ export default {
     },
     navigateToOffices() {
       this.$router.push({name: 'tutorials'}); // necesita cambiar a componente de lista de oficinas del proveedor
+    },
+
+    gotoCreation(){
+      this.$router.push({name: 'add-reservation'});
     },
 
     close() {

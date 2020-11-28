@@ -45,7 +45,7 @@ export default {
       console.log('this')
       ReservationsService.addReservation(this.item, this.item.accountId)
           .then(() => {
-            console.log('ola')
+            this.$router.push({name: 'user-reservations'});
           })
           .catch(e => {
             console.log(e);

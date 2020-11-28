@@ -149,6 +149,7 @@ export default {
       OfficeService.getAll()
           .then(response => {
             this.offices = response.data;
+            console.log(response.data)
             this.displayOffices = response.data.map(this.getDisplayOffice);
           })
           .catch((e) => {
@@ -162,6 +163,7 @@ export default {
         address: office.address,
         title: office.title,
         capacity: office.capacity,
+        floor: office.floor,
         price: office.price,
         description: office.description,
         allow_resources: office.allow_resources ? "Permite" : "No permite",

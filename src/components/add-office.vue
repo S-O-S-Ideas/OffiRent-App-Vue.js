@@ -7,6 +7,9 @@
       <v-container>
         <v-row>
           <v-col cols="12" sm="6" md="4">
+            <v-text-field v-model="item.title" label="Nombre" ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="6" md="4">
             <v-text-field v-model="item.address" label="Dirección" :rules="rules.addressRules" required></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="4">
@@ -45,6 +48,7 @@ export default {
   data () {
     return {
       item: {
+        title:'',
         address: '',
         floor: 0,
         capacity: 0,
@@ -108,7 +112,9 @@ export default {
     },
     navigateToOffices() {
       this.$router.push({name: 'workspace'});
-    }
+    },
+
+
   }
 }
 </script>

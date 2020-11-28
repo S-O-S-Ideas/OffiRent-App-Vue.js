@@ -18,16 +18,16 @@
           <router-link class="white--text" to="/">Home</router-link>
         </v-btn>
         <v-btn depressed>
-          <router-link class="white--text" to="/workplaces">Search</router-link>
+          <router-link class="white--text" to="/workplaces">Busqueda</router-link>
         </v-btn>
         <v-btn depressed>
-          <router-link class="white--text" to="/reservations">Reservations</router-link>
+          <router-link class="white--text" to="/reservations">Reservas</router-link>
         </v-btn>
         <v-btn depressed>
-          <router-link class="white--text" to="/myworkplaces/">Workplaces</router-link>
+          <router-link class="white--text" to="/myworkplaces/">Mis Oficinas</router-link>
         </v-btn>
         <v-btn depressed>
-          <router-link class="white--text" to="/profile">Profile</router-link>
+          <router-link class="white--text" to="/profile">Perfil</router-link>
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>>

@@ -3,7 +3,7 @@
     <ViewUser></ViewUser>
     <Nuevos></Nuevos>
 
-    <img alt="Vue logo" src="../assets/offirent.png">
+<!--    <img alt="Vue logo" src="../assets/offirent.png">-->
 
   </div>
 </template>
