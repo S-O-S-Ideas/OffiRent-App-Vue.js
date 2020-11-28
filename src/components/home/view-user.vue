@@ -20,7 +20,7 @@
 
 <script>
 export default {
-name: "view-user",
+  name: "view-user",
   data () {
     return {
       intervalo: 3000,

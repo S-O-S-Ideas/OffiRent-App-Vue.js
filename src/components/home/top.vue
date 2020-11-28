@@ -10,7 +10,7 @@
         <v-flex xs12 class="mb-3" v-for="office in offices.slice(2,5)" :key="office.id">
           <v-card max-width="400px">
             <v-img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_898700298_2000131820009280352_424477.jpg"></v-img>
-            <v-card-title>{{office.address}}</v-card-title>
+            <v-card-title>{{office.title}}</v-card-title>
             <v-card-text>
               <v-row align="center" class="mx-0">
                 <v-rating :value="office.score" color="amber" dense readonly size="14"></v-rating>
@@ -56,54 +56,18 @@
 </template>
 
 <script>
+import OfficeService from "@/services/offices-service";
+
 export default {
-name: "top",
+  name: "top",
   data () {
     return {
-      offices: [
-        {
-          id:1,
-          status: false,
-          address: "office 01",
-          price: 250,
-          score: 4.5,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:2,
-          status: false,
-          address: "office 02",
-          price: 300,
-          score: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:3,
-          status: false,
-          address: "office 03",
-          price: 305,
-          score: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:4,
-          status: false,
-          address: "office 04",
-          price: 305,
-          score: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:5,
-          status: false,
-          address: "office 05",
-          price: 305,
-          score: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-      ],
+      offices: [],
     }
   },
+  mounted() {
+    OfficeService.getAllOffices().then(response => {this.offices = response.data.sort((a,b) => b.score - a.score);});
+  }
 }
 </script>
 

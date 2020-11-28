@@ -13,9 +13,9 @@
             <v-card-title>{{office.title}}</v-card-title>
             <v-card-text>
               <v-row align="center" class="mx-0">
-                <v-rating :value="office.rating" color="amber" dense readonly size="14"></v-rating>
+                <v-rating :value="office.score" color="amber" dense readonly size="14"></v-rating>
                 <div class="grey--text ml-4">
-                  {{office.rating}}
+                  {{office.score}}
                 </div>
                 <v-spacer/>
                 <div class="green--text">
@@ -26,7 +26,6 @@
             <v-expand-transition>
               <div v-show="show">
                 <v-divider></v-divider>
-
                 <v-card-text>
                   {{office.description}}
                 </v-card-text>
@@ -56,55 +55,20 @@
 </template>
 
 <script>
+import OfficeService from '@/services/offices-service';
 export default {
-name: "top-valuation",
+  name: "top-valuation",
   data () {
     return {
       show: false,
-      offices: [
-        {
-          id:1,
-          status: false,
-          title: "office 01",
-          price: 250,
-          rating: 4.5,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:2,
-          status: false,
-          title: "office 02",
-          price: 300,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:3,
-          status: false,
-          title: "office 03",
-          price: 300,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:4,
-          status: false,
-          title: "office 04",
-          price: 300,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:5,
-          status: false,
-          title: "office 05",
-          price: 300,
-          rating: 5.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-      ],
+      offices: [],
     }
   },
+  computed: {
+  },
+  mounted() {
+    OfficeService.getAllOffices().then(response => {this.offices = response.data.sort((a,b) => b.score - a.score);});
+  }
 }
 </script>
 

@@ -8,7 +8,12 @@ class OfficesService {
     get(id) {
         return http.get(`/workspace/${id}`);
     }
-
+    getAllOffices(){
+        return http.get('/offices');
+    }
+    getAllDistrict() {
+        return http.get('/district');
+    }
     create(data) {
         return http.post("/offices", data);
     }

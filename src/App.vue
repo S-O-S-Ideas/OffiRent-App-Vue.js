@@ -20,7 +20,7 @@
         <v-btn depressed>
           <router-link class="white--text" to="/workplaces">Search</router-link>
         </v-btn>
-        <v-btn depressed>
+        <v-btn deprezssed>
           <router-link class="white--text" to="/reservations">Reservations</router-link>
         </v-btn>
         <v-btn depressed>

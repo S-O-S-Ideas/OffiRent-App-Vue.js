@@ -6,17 +6,17 @@
           <h2> Nuevas Oficinas</h2>
         </v-col>
       </v-row>
-      <v-container grid-list-md class="light-blue lighten-2">
+      <v-container grid-list-md>
         <v-layout row wrap>
-          <v-flex xs12 sm4 class="mb-3" v-for="office in offices.slice(0,3)" :key="office.id">
-            <v-card max-width="400px">
+          <v-flex xs12 sm4 class="mb-3" v-for="office in offices.slice(offices.length - 3,offices.length)" :key="office.id">
+            <v-card max-width="600px">
               <v-img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_898700298_2000131820009280352_424477.jpg"></v-img>
               <v-card-title>{{office.title}}</v-card-title>
               <v-card-text>
                 <v-row align="center" class="mx-0">
-                  <v-rating :value="office.rating" color="amber" dense readonly size="14"></v-rating>
+                  <v-rating :value="office.score" color="amber" dense readonly size="14"></v-rating>
                   <div class="grey--text ml-4">
-                    {{office.rating}}
+                    {{office.score}}
                   </div>
                   <v-spacer/>
                   <div class="green--text">
@@ -68,8 +68,9 @@
 <script>
 import TopValuation from "@/components/home/top-valuation";
 import Top from "@/components/home/top";
+import OfficeService from '@/services/offices-service';
 export default {
-name: "new",
+  name: "new",
   components: {
     TopValuation,
     Top
@@ -77,69 +78,16 @@ name: "new",
   data () {
     return {
       show: false,
-      offices: [
-        {
-          id:1,
-          title: "office 01",
-          status: false,
-          price: 250,
-          rating: 4.5,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:2,
-          title: "office 02",
-          status: false,
-          price: 300,
-          rating: 2.0,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:3,
-          title: "office 03",
-          status: false,
-          price: 150,
-          rating: 3.5,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:4,
-          title: "office 04",
-          status: false,
-          price: 150,
-          rating: 3.5,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:5,
-          title: "office 05",
-          status: false,
-          price: 150,
-          rating: 3.5,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:6,
-          title: "office 06",
-          status: false,
-          price: 150,
-          rating: 3.5,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-        {
-          id:7,
-          title: "office 08",
-          status: false,
-          price: 150,
-          rating: 3.5,
-          description: "fasfiuagfuafgauifagsfuiasfgauifagfuiafgauifagsfbuiasfga"
-        },
-      ],
+      offices: [],
     }
   },
+  mounted() {
+    OfficeService.getAllOffices().then(response => {this.offices = response.data;});
+  }
 }
 </script>
 
 <style scoped>
 
 </style>
+le>
