@@ -74,7 +74,6 @@
               <v-card-title class="headline">Reservar Oficina</v-card-title>
               <v-card-text>
                 <p>Reservar la oficina {{this.item.title}} ?</p>
-                <DateButton></DateButton>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -95,11 +94,10 @@
 <script>
 import OfficesServices from "@/services/offices-service";
 import ReservationService from "@/services/reservation-service";
-import DateButton from "@/components/DateButton";
+import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
 
 export default {
   name: "detail-office-provider",
-  components: {DateButton},
   data() {
     return {
       tab: null,
